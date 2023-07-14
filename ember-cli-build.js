@@ -16,5 +16,12 @@ module.exports = function (defaults) {
   app.import('node_modules/bootstrap/dist/css/bootstrap.css');
   app.import('node_modules/bootstrap/dist/css/bootstrap.css.map');
 
-  return app.toTree();
+  const { maybeEmbroider } = require('@embroider/test-setup');
+  return maybeEmbroider(app, {
+    skipBabel: [
+      {
+        package: 'qunit',
+      },
+    ],
+  });
 };
