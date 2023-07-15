@@ -8,6 +8,6 @@ module('Acceptance | basics', function (hooks) {
 
   test('should select the first tab by default', async function (assert) {
     await visit('/');
-    assert.equal(findTab('Tab A').getAttribute('aria-selected'), 'true');
+    assert.strictEqual(findTab('Tab A').getAttribute('aria-selected'), 'true');
   });
 });

@@ -9,13 +9,13 @@ module('Acceptance | query params', function (hooks) {
   test('should select a tab by query param', async function (assert) {
     await visit('/query-params?tab=B');
 
-    assert.equal(findTab('Tab B').getAttribute('aria-selected'), 'true');
+    assert.strictEqual(findTab('Tab B').getAttribute('aria-selected'), 'true');
   });
 
   test('selecting a tab should update the query param', async function (assert) {
     await visit('/query-params?tab=B');
     await click(findTab('Tab C'));
 
-    assert.equal(currentURL(), '/query-params?tab=C');
+    assert.strictEqual(currentURL(), '/query-params?tab=C');
   });
 });

@@ -40,19 +40,23 @@ module.exports = async function () {
         },
       },
       {
-        env: {
-          EMBER_OPTIONAL_FEATURES: JSON.stringify({
-            'jquery-integration': true,
-          }),
-        },
-        name: 'ember-default-with-jquery',
+        name: 'ember-beta',
         npm: {
           devDependencies: {
-            '@ember/jquery': '^1.1.0',
+            'ember-source': await getChannelURL('beta'),
           },
         },
       },
       {
+        name: 'ember-canary',
+        npm: {
+          devDependencies: {
+            'ember-source': await getChannelURL('canary'),
+          },
+        },
+      },
+      {
+        name: 'ember-classic',
         env: {
           EMBER_OPTIONAL_FEATURES: JSON.stringify({
             'application-template-wrapper': true,
@@ -60,7 +64,6 @@ module.exports = async function () {
             'template-only-glimmer-components': false,
           }),
         },
-        name: 'ember-classic',
         npm: {
           devDependencies: {
             'ember-source': '~3.28.0',

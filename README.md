@@ -1,4 +1,4 @@
-# ivy-tabs
+# @puppet/ivy-tabs
 
 [![Build Status](https://travis-ci.org/IvyApp/ivy-tabs.svg?branch=master)](https://travis-ci.org/IvyApp/ivy-tabs)
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=IvyApp/ivy-tabs)](https://dependabot.com)
@@ -7,6 +7,7 @@
 A group of Ember.js Components that interact to create a [WAI-ARIA tab] interface.
 
 Special thanks to [ic-tabs], which this addon is based on.
+## Compatibility
 
 * Ember.js v3.24 or above
 * Ember CLI v3.24 or above
@@ -101,7 +102,7 @@ change is tested or it won't be merged.
 ### Installation
 
 ```sh
-git clone git@github.com:IvyApp/ivy-tabs.git
+git clone git@github.com:puppetlabs/ivy-tabs.git
 cd ivy-tabs
 npm install
 ```

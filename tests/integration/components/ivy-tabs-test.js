@@ -31,7 +31,7 @@ module('ivy-tabs', function (hooks) {
       this.items.removeAt(1);
     });
 
-    assert.equal(this.selection, 'Item 1', 'previous tab became active');
+    assert.strictEqual(this.selection, 'Item 1', 'previous tab became active');
   });
 
   test('selects previous tab if active tab is removed via replacement', async function (assert) {
@@ -43,7 +43,7 @@ module('ivy-tabs', function (hooks) {
       this.set('items', A(['Item 3']));
     });
 
-    assert.equal(this.selection, 'Item 3', 'previous tab became active');
+    assert.strictEqual(this.selection, 'Item 3', 'previous tab became active');
   });
 
   test('retains tab selection if preceeding tab is removed', async function (assert) {
@@ -55,7 +55,7 @@ module('ivy-tabs', function (hooks) {
       this.items.removeAt(0);
     });
 
-    assert.equal(this.selection, 'Item 2', 'tab selection is retained');
+    assert.strictEqual(this.selection, 'Item 2', 'tab selection is retained');
   });
 
   test('selects the next tab when an active, first tab is removed', async function (assert) {
@@ -67,7 +67,7 @@ module('ivy-tabs', function (hooks) {
       this.items.removeAt(0);
     });
 
-    assert.equal(this.selection, 'Item 2', 'selects next tab');
+    assert.strictEqual(this.selection, 'Item 2', 'selects next tab');
   });
 
   test('does not select tabs while being destroyed', async function (assert) {
@@ -94,7 +94,7 @@ module('ivy-tabs', function (hooks) {
       {{/unless}}
     `);
 
-    assert.equal(
+    assert.strictEqual(
       selectionCount,
       1,
       'Triggers initial, automatic on-select during setup'
@@ -105,7 +105,7 @@ module('ivy-tabs', function (hooks) {
       this.set('hideComponent', true);
     });
 
-    assert.equal(
+    assert.strictEqual(
       selectionCount,
       1,
       'Does not trigger on-select during destroy'

@@ -10,6 +10,6 @@ module('Acceptance | mouse interaction', function (hooks) {
     await visit('/');
     await click(findTab('Tab B'));
 
-    assert.equal(findTab('Tab B').getAttribute('aria-selected'), 'true');
+    assert.strictEqual(findTab('Tab B').getAttribute('aria-selected'), 'true');
   });
 });

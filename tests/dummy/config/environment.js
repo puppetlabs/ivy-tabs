@@ -2,20 +2,17 @@
 
 module.exports = function (environment) {
   let ENV = {
-    APP: {
-      // Here you can pass flags/options to your application instance
-      // when it is created
-    },
+    modulePrefix: 'dummy',
+    environment,
+    rootURL: '/',
+    locationType: 'history',
     EmberENV: {
       EXTEND_PROTOTYPES: {
         // Prevent Ember Data from overriding Date.parse.
         Date: false,
       },
     },
-    environment,
-    locationType: 'auto',
-    modulePrefix: 'dummy',
-    rootURL: '/',
+    APP: {},
   };
 
   if (environment === 'development') {
