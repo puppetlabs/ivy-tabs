@@ -3,7 +3,7 @@
 var EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 
 module.exports = function (defaults) {
-  let app = new EmberAddon(defaults, {
+  const app = new EmberAddon(defaults, {
     // Add options here
   });
 
@@ -16,5 +16,12 @@ module.exports = function (defaults) {
   app.import('node_modules/bootstrap/dist/css/bootstrap.css');
   app.import('node_modules/bootstrap/dist/css/bootstrap.css.map');
 
-  return app.toTree();
+  const { maybeEmbroider } = require('@embroider/test-setup');
+  return maybeEmbroider(app, {
+    skipBabel: [
+      {
+        package: 'qunit',
+      },
+    ],
+  });
 };

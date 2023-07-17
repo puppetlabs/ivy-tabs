@@ -2,7 +2,7 @@
  * @type {import('prettier').Options}
  */
 const config = {
-  singleQuote: true
+  singleQuote: true,
 };
 
 // eslint-disable-next-line no-undef

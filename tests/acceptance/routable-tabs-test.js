@@ -8,8 +8,17 @@ module('Acceptance | query params', function (hooks) {
 
   test('tabs should have correct hrefs', async function (assert) {
     await visit('/routable-tabs');
-    assert.equal(findTab('Tab A').getAttribute('href'), '/routable-tabs/tab-a');
-    assert.equal(findTab('Tab B').getAttribute('href'), '/routable-tabs/tab-b');
-    assert.equal(findTab('Tab C').getAttribute('href'), '/routable-tabs/tab-c');
+    assert.strictEqual(
+      findTab('Tab A').getAttribute('href'),
+      '/routable-tabs/tab-a'
+    );
+    assert.strictEqual(
+      findTab('Tab B').getAttribute('href'),
+      '/routable-tabs/tab-b'
+    );
+    assert.strictEqual(
+      findTab('Tab C').getAttribute('href'),
+      '/routable-tabs/tab-c'
+    );
   });
 });

@@ -39,23 +39,23 @@ module('Acceptance | accessibility attributes', function (hooks) {
   test('tabs should be [role="tab"]', async function (assert) {
     await visit('/');
 
-    assert.equal(findTab('Tab A').getAttribute('role'), 'tab');
-    assert.equal(findTab('Tab B').getAttribute('role'), 'tab');
-    assert.equal(findTab('Tab C').getAttribute('role'), 'tab');
+    assert.strictEqual(findTab('Tab A').getAttribute('role'), 'tab');
+    assert.strictEqual(findTab('Tab B').getAttribute('role'), 'tab');
+    assert.strictEqual(findTab('Tab C').getAttribute('role'), 'tab');
   });
 
   test('tabs should be [aria-controls], set to the ID of their tabpanel', async function (assert) {
     await visit('/');
 
-    assert.equal(
+    assert.strictEqual(
       findTab('Tab A').getAttribute('aria-controls'),
       'basic-panel-a'
     );
-    assert.equal(
+    assert.strictEqual(
       findTab('Tab B').getAttribute('aria-controls'),
       'basic-panel-b'
     );
-    assert.equal(
+    assert.strictEqual(
       findTab('Tab C').getAttribute('aria-controls'),
       'basic-panel-c'
     );
@@ -64,33 +64,33 @@ module('Acceptance | accessibility attributes', function (hooks) {
   test('the active tab should be [aria-expanded="true"]', async function (assert) {
     await visit('/');
 
-    assert.equal(findTab('Tab A').getAttribute('aria-expanded'), 'true');
+    assert.strictEqual(findTab('Tab A').getAttribute('aria-expanded'), 'true');
   });
 
   test('the active tab should be [aria-selected="true"]', async function (assert) {
     await visit('/');
 
-    assert.equal(findTab('Tab A').getAttribute('aria-selected'), 'true');
+    assert.strictEqual(findTab('Tab A').getAttribute('aria-selected'), 'true');
   });
 
   test('the inactive tabs should be [aria-expanded="false"]', async function (assert) {
     await visit('/');
 
-    assert.equal(findTab('Tab B').getAttribute('aria-expanded'), 'false');
-    assert.equal(findTab('Tab C').getAttribute('aria-expanded'), 'false');
+    assert.strictEqual(findTab('Tab B').getAttribute('aria-expanded'), 'false');
+    assert.strictEqual(findTab('Tab C').getAttribute('aria-expanded'), 'false');
   });
 
   test('the inactive tabs should be [aria-selected="false"]', async function (assert) {
     await visit('/');
 
-    assert.equal(findTab('Tab B').getAttribute('aria-selected'), 'false');
-    assert.equal(findTab('Tab C').getAttribute('aria-selected'), 'false');
+    assert.strictEqual(findTab('Tab B').getAttribute('aria-selected'), 'false');
+    assert.strictEqual(findTab('Tab C').getAttribute('aria-selected'), 'false');
   });
 
   test('the active tab should be [tabindex="0"]', async function (assert) {
     await visit('/');
 
-    assert.equal(findTab('Tab A').getAttribute('tabindex'), '0');
+    assert.strictEqual(findTab('Tab A').getAttribute('tabindex'), '0');
   });
 
   test('the inactive tabs should not be [tabindex]', async function (assert) {
@@ -103,23 +103,23 @@ module('Acceptance | accessibility attributes', function (hooks) {
   test('tabpanels should be [role="tabpanel"]', async function (assert) {
     await visit('/');
 
-    assert.equal(findTabPanel('Tab A').getAttribute('role'), 'tabpanel');
-    assert.equal(findTabPanel('Tab B').getAttribute('role'), 'tabpanel');
-    assert.equal(findTabPanel('Tab C').getAttribute('role'), 'tabpanel');
+    assert.strictEqual(findTabPanel('Tab A').getAttribute('role'), 'tabpanel');
+    assert.strictEqual(findTabPanel('Tab B').getAttribute('role'), 'tabpanel');
+    assert.strictEqual(findTabPanel('Tab C').getAttribute('role'), 'tabpanel');
   });
 
   test('tabpanels should be [aria-labelledby], set to the ID of their tab', async function (assert) {
     await visit('/');
 
-    assert.equal(
+    assert.strictEqual(
       findTabPanel('Tab A').getAttribute('aria-labelledby'),
       'basic-tab-a'
     );
-    assert.equal(
+    assert.strictEqual(
       findTabPanel('Tab B').getAttribute('aria-labelledby'),
       'basic-tab-b'
     );
-    assert.equal(
+    assert.strictEqual(
       findTabPanel('Tab C').getAttribute('aria-labelledby'),
       'basic-tab-c'
     );
@@ -128,19 +128,28 @@ module('Acceptance | accessibility attributes', function (hooks) {
   test('the active tabpanel should be [aria-hidden="false"]', async function (assert) {
     await visit('/');
 
-    assert.equal(findTabPanel('Tab A').getAttribute('aria-hidden'), 'false');
+    assert.strictEqual(
+      findTabPanel('Tab A').getAttribute('aria-hidden'),
+      'false'
+    );
   });
 
   test('the inactive tabpanels should be [aria-hidden="true"]', async function (assert) {
     await visit('/');
 
-    assert.equal(findTabPanel('Tab B').getAttribute('aria-hidden'), 'true');
-    assert.equal(findTabPanel('Tab C').getAttribute('aria-hidden'), 'true');
+    assert.strictEqual(
+      findTabPanel('Tab B').getAttribute('aria-hidden'),
+      'true'
+    );
+    assert.strictEqual(
+      findTabPanel('Tab C').getAttribute('aria-hidden'),
+      'true'
+    );
   });
 
   test('the active tabpanel should be [tabindex="0"]', async function (assert) {
     await visit('/');
 
-    assert.equal(findTabPanel('Tab A').getAttribute('tabindex'), '0');
+    assert.strictEqual(findTabPanel('Tab A').getAttribute('tabindex'), '0');
   });
 });

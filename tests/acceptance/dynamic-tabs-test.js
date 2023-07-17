@@ -10,18 +10,18 @@ module('Acceptance | dynamic tabs', function (hooks) {
     await visit('/dynamic-tabs');
 
     const tablist = find('#dynamic-tablist');
-    assert.equal(tablist.getAttribute('aria-multiselectable'), null);
-    assert.equal(tablist.getAttribute('role'), 'presentation');
+    assert.strictEqual(tablist.getAttribute('aria-multiselectable'), null);
+    assert.strictEqual(tablist.getAttribute('role'), 'presentation');
 
     await click(findButtonByText('Add an Item'));
 
-    assert.equal(tablist.getAttribute('aria-multiselectable'), 'false');
-    assert.equal(tablist.getAttribute('role'), 'tablist');
+    assert.strictEqual(tablist.getAttribute('aria-multiselectable'), 'false');
+    assert.strictEqual(tablist.getAttribute('role'), 'tablist');
 
     await click(findTab('Item 1').querySelector('.close'));
 
-    assert.equal(tablist.getAttribute('aria-multiselectable'), null);
-    assert.equal(tablist.getAttribute('role'), 'presentation');
+    assert.strictEqual(tablist.getAttribute('aria-multiselectable'), null);
+    assert.strictEqual(tablist.getAttribute('role'), 'presentation');
   });
 
   test('the first tab added should be selected', async function (assert) {

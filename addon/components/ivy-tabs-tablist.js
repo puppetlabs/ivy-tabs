@@ -1,5 +1,6 @@
-import Component from '@ember/component';
+import Component from '@glimmer/component';
 import { isNone, isEmpty } from '@ember/utils';
+import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { once, scheduleOnce } from '@ember/runloop';
 
@@ -12,6 +13,8 @@ export const UP_ARROW = 38;
  * @module ivy-tabs
  */
 
+let instanceCount = 0;
+
 /**
  * @class IvyTabListComponent
  * @namespace IvyTabs
@@ -19,31 +22,14 @@ export const UP_ARROW = 38;
  */
 export default class IvyTabsTabListComponent extends Component {
   _registerWithTabsContainer() {
-    this.tabsContainer.registerTabList(this);
+    this.internalId = `ivy-tabs-list-${instanceCount++}`;
+    this.args.tabsContainer.registerTabList(this);
     once(this, this.selectTab);
   }
 
   _unregisterWithTabsContainer() {
-    this.tabsContainer.unregisterTabList(this);
+    this.args.tabsContainer.unregisterTabList(this);
   }
-
-  /**
-   * The label of the tablist for screenreaders to use.
-   *
-   * @property aria-label
-   * @type String
-   * @default ''
-   */
-  'aria-label' = '';
-
-  /**
-   * Tells screenreaders to notify the user during DOM modifications.
-   *
-   * @property aria-live
-   * @type String
-   * @default 'polite'
-   */
-  'aria-live' = 'polite';
 
   /**
    * Tells screenreaders that only one tab can be selected at a time.
@@ -52,22 +38,12 @@ export default class IvyTabsTabListComponent extends Component {
    * @type String
    * @default 'false'
    */
-  get 'aria-multiselectable'() {
+  get isMultiSelectable() {
     if (!this.isEmpty) {
       return 'false';
     }
     return undefined;
   }
-
-  /**
-   * Tells screenreaders which DOM modification activites to monitor for user
-   * notification.
-   *
-   * @property aria-relevant
-   * @type String
-   * @default 'all'
-   */
-  'aria-relevant' = 'all';
 
   /**
    * The `role` attribute of the tab list element.
@@ -90,15 +66,6 @@ export default class IvyTabsTabListComponent extends Component {
     }
   }
 
-  attributeBindings = [
-    'aria-label',
-    'aria-live',
-    'aria-multiselectable',
-    'aria-relevant',
-  ];
-
-  classNames = ['ivy-tabs-tablist'];
-
   /**
    * Gives focus to the selected tab.
    *
@@ -110,7 +77,7 @@ export default class IvyTabsTabListComponent extends Component {
 
   constructor() {
     super(...arguments);
-    once(this, this._registerWithTabsContainer);
+    this._registerWithTabsContainer();
   }
 
   get isEmpty() {
@@ -125,6 +92,7 @@ export default class IvyTabsTabListComponent extends Component {
    * @method keyDown
    * @param {Event} event
    */
+  @action
   keyDown(event) {
     switch (event.keyCode) {
       case LEFT_ARROW:
@@ -150,7 +118,7 @@ export default class IvyTabsTabListComponent extends Component {
    * @param {IvyTabs.IvyTabComponent} tab
    */
   registerTab(tab) {
-    this.tabs.pushObject(tab);
+    this.tabs = this.tabs.concat(tab);
     once(this, this.selectTab);
   }
 
@@ -174,7 +142,7 @@ export default class IvyTabsTabListComponent extends Component {
         idx = 0;
       }
 
-      tab = tabs.objectAt(idx);
+      tab = tabs[idx];
     } while (tab && tab.isDestroying && tab !== selectedTab);
 
     if (tab) {
@@ -206,7 +174,7 @@ export default class IvyTabsTabListComponent extends Component {
         idx = 0;
       }
 
-      tab = tabs.objectAt(idx);
+      tab = tabs[idx];
     } while (tab && tab.isDestroying && tab !== selectedTab);
 
     if (tab) {
@@ -215,7 +183,15 @@ export default class IvyTabsTabListComponent extends Component {
   }
 
   get selection() {
-    return this.tabsContainer.selection;
+    return this.args.tabsContainer.selection;
+  }
+
+  get elementId() {
+    return this.args.id || this.internalId;
+  }
+
+  get effectiveAriaLabel() {
+    return this.args['aria-label'];
   }
 
   selectTab() {
@@ -235,7 +211,7 @@ export default class IvyTabsTabListComponent extends Component {
    * @param {Number} index
    */
   selectTabByIndex(index) {
-    const tab = this.tabs.objectAt(index);
+    const tab = this.tabs[index];
 
     if (tab) {
       tab.select();
@@ -243,7 +219,9 @@ export default class IvyTabsTabListComponent extends Component {
   }
 
   selectTabByModel(model) {
-    const tab = this.tabs.findBy('model', model);
+    const tab = this.tabs.find((element) => {
+      return element.model === model;
+    });
 
     if (tab) {
       tab.select();
@@ -268,15 +246,6 @@ export default class IvyTabsTabListComponent extends Component {
   @tracked tabs = [];
 
   /**
-   * The `ivy-tabs` component.
-   *
-   * @property tabsContainer
-   * @type IvyTabs.IvyTabsComponent
-   * @default null
-   */
-  @tracked tabsContainer = null;
-
-  /**
    * Removes a tab from the `tabs` array.
    *
    * @method unregisterTab
@@ -293,11 +262,13 @@ export default class IvyTabsTabListComponent extends Component {
       }
     }
 
-    this.tabs.removeObject(tab);
+    this.tabs = this.tabs.filter((element) => {
+      return element !== tab;
+    });
   }
 
   willDestroy() {
     super.willDestroy(...arguments);
-    once(this, this._unregisterWithTabsContainer);
+    this._unregisterWithTabsContainer();
   }
 }

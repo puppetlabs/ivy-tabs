@@ -112,7 +112,9 @@ export default class IvyTabsPanelComponent extends Component {
   get tab() {
     const tabs = this.tabs;
     if (tabs) {
-      return tabs.findBy('model', this.args.model);
+      return tabs.find((element) => {
+        return element.model === this.args.model;
+      });
     }
     return undefined;
   }
