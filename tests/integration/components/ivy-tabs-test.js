@@ -10,61 +10,73 @@ module('ivy-tabs', function (hooks) {
   setupRenderingTest(hooks);
 
   const eachTemplate = hbs`
-    {{#ivy-tabs selection=this.selection as |tabs|}}
-      {{#tabs.tablist as |tablist|}}
+    <IvyTabs @selection={{this.selection}} as |tabs|>
+      <tabs.tablist as |tablist|>
         {{#each this.items as |item|}}
-          {{#tablist.tab model=item onSelect=(action (mut this.selection))}}{{item}}{{/tablist.tab}}
+          <tablist.tab @model={{item}} @onSelect={{this.updateSelection}}>{{item}}</tablist.tab>
         {{/each}}
-      {{/tabs.tablist}}
+      </tabs.tablist>
       {{#each this.items as |item|}}
-        {{#tabs.tabpanel item}}{{item}}{{/tabs.tabpanel}}
+        <tabs.tabpanel item>{{item}}</tabs.tabpanel>
       {{/each}}
-    {{/ivy-tabs}}
+    </IvyTabs>
   `;
 
   test('selects previous tab if active tab is removed', async function (assert) {
+    this.set('updateSelection', (item) => {
+      this.set('selection', item);
+    });
     this.set('selection', 'Item 2');
-    this.set('items', A(['Item 1', 'Item 2']));
+    this.set('items', ['Item 1', 'Item 2']);
     await render(eachTemplate);
 
     run(this, function () {
-      this.items.removeAt(1);
+      this.set('items', ['Item 1']);
     });
 
     assert.strictEqual(this.selection, 'Item 1', 'previous tab became active');
   });
 
   test('selects previous tab if active tab is removed via replacement', async function (assert) {
+    this.set('updateSelection', (item) => {
+      this.set('selection', item);
+    });
     this.set('selection', 'Item 2');
-    this.set('items', A(['Item 1', 'Item 2']));
+    this.set('items', ['Item 1', 'Item 2']);
     await render(eachTemplate);
 
     run(this, function () {
-      this.set('items', A(['Item 3']));
+      this.set('items', ['Item 3']);
     });
 
     assert.strictEqual(this.selection, 'Item 3', 'previous tab became active');
   });
 
   test('retains tab selection if preceeding tab is removed', async function (assert) {
+    this.set('updateSelection', (item) => {
+      this.set('selection', item);
+    });
     this.set('selection', 'Item 2');
     this.set('items', A(['Item 1', 'Item 2']));
     await render(eachTemplate);
 
     run(this, function () {
-      this.items.removeAt(0);
+      this.items.set('Item 2');
     });
 
     assert.strictEqual(this.selection, 'Item 2', 'tab selection is retained');
   });
 
   test('selects the next tab when an active, first tab is removed', async function (assert) {
+    this.set('updateSelection', (item) => {
+      this.set('selection', item);
+    });
     this.set('selection', 'Item 1');
-    this.set('items', A(['Item 1', 'Item 2', 'Item 3']));
+    this.set('items', ['Item 1', 'Item 2', 'Item 3']);
     await render(eachTemplate);
 
     run(this, function () {
-      this.items.removeAt(0);
+      this.set('items', ['Item 2', 'Item 3']);
     });
 
     assert.strictEqual(this.selection, 'Item 2', 'selects next tab');
@@ -78,7 +90,7 @@ module('ivy-tabs', function (hooks) {
       selectionCount++;
     });
 
-    this.set('items', A(['Item 1', 'Item 2', 'Item 3']));
+    this.set('items', ['Item 1', 'Item 2', 'Item 3']);
     await render(hbs`
       {{#unless this.hideComponent}}
         <IvyTabs @selection={{this.selection}} as |tabs|>

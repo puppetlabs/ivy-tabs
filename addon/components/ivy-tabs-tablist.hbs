@@ -1,1 +1,28 @@
-{{yield (hash tab=(component "ivy-tabs-tab" tabList=this))}}
+{{!-- currently glimmer components don't support dynamic tags. This currently supports 'ul', and defaults to 'div'--}}
+{{~#if (eq @tagName "ul")~}}
+    <ul id={{this.elementId}} 
+        class="ivy-tabs-tablist" 
+        role={{this.ariaRole}} 
+        aria-relevant="all" 
+        aria-live="polite" 
+        aria-label={{if this.effectiveAriaLabel this.effectiveAriaLabel}}
+        aria-multiselectable={{this.isMultiSelectable}} 
+        ...attributes
+        {{on "keydown" this.keyDown}}>
+
+        {{~yield (hash tab=(component "ivy-tabs-tab" tabList=this))~}}
+    </ul>
+{{~else~}}
+    <div id={{this.elementId}} 
+        class="ivy-tabs-tablist" 
+        role={{this.ariaRole}} 
+        aria-relevant="all" 
+        aria-live="polite" 
+        aria-label={{if this.effectiveAriaLabel this.effectiveAriaLabel}}
+        aria-multiselectable={{this.isMultiSelectable}} 
+        ...attributes
+        {{on "keydown" this.keyDown}}>
+
+        {{~yield (hash tab=(component "ivy-tabs-tab" tabList=this))~}}
+    </div>
+{{~/if~}}

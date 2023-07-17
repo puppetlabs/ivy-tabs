@@ -16,6 +16,9 @@ let ivyTabsTabCount = 0;
 export default class IvyTabsTabComponent extends Component {
   _registerWithTabList() {
     this.args.tabList.registerTab(this);
+    if (this.isSelected) {
+      this.select();
+    }
   }
 
   _unregisterWithTabList() {
@@ -100,14 +103,15 @@ export default class IvyTabsTabComponent extends Component {
    *
    * @method select
    */
+  @action
   select() {
     const onSelect = this.args.onSelect;
-
     if (!this.isDestroying && typeof onSelect === 'function') {
       onSelect(this.args.model);
     }
   }
 
+  @action
   focus() {
     let element = document.getElementById(this.id);
     if (element) {
@@ -196,7 +200,7 @@ export default class IvyTabsTabComponent extends Component {
    */
   get tabsContainer() {
     if (this.args.tabList) {
-      return this.args.tabList.tabsContainer;
+      return this.args.tabList.args.tabsContainer;
     }
     return null;
   }

@@ -29,7 +29,7 @@ export default class IvyTabsTabsComponent extends Component {
    * @param {IvyTabs.IvyTabPanelComponent} tabPanel
    */
   registerTabPanel(tabPanel) {
-    this.tabPanels.pushObject(tabPanel);
+    this.tabPanels = this.tabPanels.concat(tabPanel);
   }
 
   @tracked tabPanels = [];
@@ -55,6 +55,8 @@ export default class IvyTabsTabsComponent extends Component {
    * @param {IvyTabs.IvyTabPanelComponent} tabPanel
    */
   unregisterTabPanel(tabPanel) {
-    this.tabPanels.removeObject(tabPanel);
+    this.tabPanels = this.tabPanels.filter((element) => {
+      return element !== tabPanel;
+    });
   }
 }
