@@ -131,21 +131,6 @@ export default class IvyTabsTabComponent extends Component {
   }
 
   /**
-   * The `selected` attribute of the tab element. If the tab's `isSelected`
-   * property is `true` this will be the literal string 'selected', otherwise
-   * it will be `undefined`.
-   *
-   * @property selected
-   * @type String
-   */
-  get selected() {
-    if (this.isSelected) {
-      return 'selected';
-    }
-    return undefined;
-  }
-
-  /**
    * The `ivy-tabs-tabpanel` associated with this tab.
    *
    * @property tabPanel
