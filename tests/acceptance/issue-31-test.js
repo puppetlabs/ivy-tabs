@@ -26,7 +26,7 @@ module('Acceptance | issue #31', function (hooks) {
     assert.strictEqual(
       findTab('Item 1').getAttribute('aria-selected'),
       'true',
-      'Item 1 is selected'
+      'Item 1 is selected',
     );
 
     await click(findCheckboxFor('Item 1'));
@@ -36,7 +36,7 @@ module('Acceptance | issue #31', function (hooks) {
     assert.strictEqual(
       findTab('Item 3').getAttribute('aria-selected'),
       'true',
-      'Item 3 is selected'
+      'Item 3 is selected',
     );
   });
 });
