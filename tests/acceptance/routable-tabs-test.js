@@ -10,15 +10,15 @@ module('Acceptance | query params', function (hooks) {
     await visit('/routable-tabs');
     assert.strictEqual(
       findTab('Tab A').getAttribute('href'),
-      '/routable-tabs/tab-a'
+      '/routable-tabs/tab-a',
     );
     assert.strictEqual(
       findTab('Tab B').getAttribute('href'),
-      '/routable-tabs/tab-b'
+      '/routable-tabs/tab-b',
     );
     assert.strictEqual(
       findTab('Tab C').getAttribute('href'),
-      '/routable-tabs/tab-c'
+      '/routable-tabs/tab-c',
     );
   });
 });

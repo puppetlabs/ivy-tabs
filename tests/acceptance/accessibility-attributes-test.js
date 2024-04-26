@@ -113,15 +113,15 @@ module('Acceptance | accessibility attributes', function (hooks) {
 
     assert.strictEqual(
       findTabPanel('Tab A').getAttribute('aria-labelledby'),
-      'basic-tab-a'
+      'basic-tab-a',
     );
     assert.strictEqual(
       findTabPanel('Tab B').getAttribute('aria-labelledby'),
-      'basic-tab-b'
+      'basic-tab-b',
     );
     assert.strictEqual(
       findTabPanel('Tab C').getAttribute('aria-labelledby'),
-      'basic-tab-c'
+      'basic-tab-c',
     );
   });
 
@@ -130,7 +130,7 @@ module('Acceptance | accessibility attributes', function (hooks) {
 
     assert.strictEqual(
       findTabPanel('Tab A').getAttribute('aria-hidden'),
-      'false'
+      'false',
     );
   });
 
@@ -139,11 +139,11 @@ module('Acceptance | accessibility attributes', function (hooks) {
 
     assert.strictEqual(
       findTabPanel('Tab B').getAttribute('aria-hidden'),
-      'true'
+      'true',
     );
     assert.strictEqual(
       findTabPanel('Tab C').getAttribute('aria-hidden'),
-      'true'
+      'true',
     );
   });
 

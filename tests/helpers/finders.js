@@ -1,6 +1,6 @@
 function findElementByText(selector, text) {
   return Array.from(document.querySelectorAll(selector)).find((element) =>
-    element.textContent.includes(text)
+    element.textContent.includes(text),
   );
 }
 
@@ -31,7 +31,7 @@ export function findTab(text) {
 export function findTabPanel(text) {
   const tab = findTab(text);
   const tabPanel = document.querySelector(
-    `#${tab.getAttribute('aria-controls')}`
+    `#${tab.getAttribute('aria-controls')}`,
   );
 
   if (!tabPanel) {

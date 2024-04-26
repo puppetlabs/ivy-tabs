@@ -109,7 +109,7 @@ module('ivy-tabs', function (hooks) {
     assert.strictEqual(
       selectionCount,
       1,
-      'Triggers initial, automatic on-select during setup'
+      'Triggers initial, automatic on-select during setup',
     );
 
     run(this, function () {
@@ -120,7 +120,7 @@ module('ivy-tabs', function (hooks) {
     assert.strictEqual(
       selectionCount,
       1,
-      'Does not trigger on-select during destroy'
+      'Does not trigger on-select during destroy',
     );
   });
 });
