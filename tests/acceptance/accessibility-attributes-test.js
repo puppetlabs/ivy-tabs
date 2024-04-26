@@ -49,15 +49,15 @@ module('Acceptance | accessibility attributes', function (hooks) {
 
     assert.strictEqual(
       findTab('Tab A').getAttribute('aria-controls'),
-      'basic-panel-a'
+      'basic-panel-a',
     );
     assert.strictEqual(
       findTab('Tab B').getAttribute('aria-controls'),
-      'basic-panel-b'
+      'basic-panel-b',
     );
     assert.strictEqual(
       findTab('Tab C').getAttribute('aria-controls'),
-      'basic-panel-c'
+      'basic-panel-c',
     );
   });
 
