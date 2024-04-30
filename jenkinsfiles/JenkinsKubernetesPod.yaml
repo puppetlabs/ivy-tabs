@@ -15,7 +15,7 @@ spec:
     spotinst.io/node-lifecycle: od # prevent having pre-emptible nodes
   containers:
     - name: node
-      image: timbru31/node-chrome:16
+      image: markhobson/node-chrome
       imagePullPolicy: IfNotPresent
       resources:
         requests:
