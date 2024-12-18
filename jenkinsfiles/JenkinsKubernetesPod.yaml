@@ -12,7 +12,7 @@ metadata:
 spec:
   serviceAccount: "jenkins"
   nodeSelector:
-    spotinst.io/node-lifecycle: od # prevent having pre-emptible nodes
+    cloud.google.com/gke-nodepool: jenkins-runner-1
   containers:
     - name: node
       image: markhobson/node-chrome
