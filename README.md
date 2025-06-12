@@ -4,20 +4,21 @@
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=IvyApp/ivy-tabs)](https://dependabot.com)
 [![Ember Observer Score](http://emberobserver.com/badges/ivy-tabs.svg)](http://emberobserver.com/addons/ivy-tabs)
 
-A group of Ember.js Components that interact to create a [WAI-ARIA tab] interface.
-
-Special thanks to [ic-tabs], which this addon is based on.
 ## Compatibility
 
-* Ember.js v4.12 or above
-* Ember CLI v4.12 or above
-* Node.js v18 or above
+- Ember.js v5.8 or above
+- Ember CLI v5.8 or above
+- Node.js v18 or above
 
 ## Installation
 
 ```sh
 $ ember install ivy-tabs
 ```
+
+ember install @puppet/ivy-tabs
+
+````
 
 ## Usage
 
@@ -49,17 +50,17 @@ $ ember install ivy-tabs
     <h2>Baz</h2>
   </tabs.tabpanel>
 </IvyTabs>
-```
+````
 
 Some things to note:
 
-  * Associations between tabs and panels are explicitly defined by the "models"
-    given to them. In the above example, the
-    given tab models are "TabA", "TabB", and "TabC". This model could be any
-    JavaScript Object that you'd like, they are not required to be strings.
-  * An `onSelect` action is sent when a tab is selected. As an argument, it
-    receives the model defined on the tab (for example, when the Foo tab is
-    selected, the `onSelect` event will carry "TabA" as an argument).
+- Associations between tabs and panels are explicitly defined by the "models"
+  given to them. In the above example, the
+  given tab models are "TabA", "TabB", and "TabC". This model could be any
+  JavaScript Object that you'd like, they are not required to be strings.
+- An `onSelect` action is sent when a tab is selected. As an argument, it
+  receives the model defined on the tab (for example, when the Foo tab is
+  selected, the `onSelect` event will carry "TabA" as an argument).
 
 ### Presentation
 
@@ -93,7 +94,6 @@ override the `activeClass` property of your ivy-tabs-tabpanel):
 }
 ```
 
-
 ## Contributing
 
 Fork this repo, make a new branch, and send a pull request. Make sure your
@@ -106,6 +106,8 @@ git clone git@github.com:puppetlabs/ivy-tabs.git
 cd ivy-tabs
 npm install
 ```
+
+## License
 
 ### Running
 
@@ -129,8 +131,8 @@ ember test --server
 
 ### Linting
 
-* `npm run lint:js`
-* `npm run lint:js -- --fix`
+- `npm run lint:js`
+- `npm run lint:js -- --fix`
 
 ### Building
 
