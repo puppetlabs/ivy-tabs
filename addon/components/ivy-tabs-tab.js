@@ -1,5 +1,5 @@
 import Component from '@glimmer/component';
-import { once } from '@ember/runloop';
+import { runTask, cancelTask } from 'ember-lifeline';
 import { action } from '@ember/object';
 
 /**
@@ -85,7 +85,7 @@ export default class IvyTabsTabComponent extends Component {
   constructor() {
     super(...arguments);
     this.uniqueSelector = `ivy-tabs-tab-${ivyTabsTabCount++}`;
-    once(this, this._registerWithTabList);
+    this._registerTask = runTask(this, this._registerWithTabList);
   }
 
   /**
@@ -192,6 +192,9 @@ export default class IvyTabsTabComponent extends Component {
 
   willDestroy() {
     super.willDestroy(...arguments);
-    once(this, this._unregisterWithTabList);
+    if (this._registerTask) {
+      cancelTask(this._registerTask);
+    }
+    this._unregisterWithTabList();
   }
 }

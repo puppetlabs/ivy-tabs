@@ -1,3 +1,4 @@
+/* eslint-disable ember/no-runloop */
 import Component from '@glimmer/component';
 import { isNone, isEmpty } from '@ember/utils';
 import { action } from '@ember/object';

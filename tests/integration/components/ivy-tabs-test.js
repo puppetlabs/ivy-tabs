@@ -1,5 +1,4 @@
 import hbs from 'htmlbars-inline-precompile';
-import { run } from '@ember/runloop';
 import { A } from '@ember/array';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
@@ -30,7 +29,7 @@ module('ivy-tabs', function (hooks) {
     this.set('items', ['Item 1', 'Item 2']);
     await render(eachTemplate);
 
-    run(this, function () {
+    await Promise.resolve().then(() => {
       this.set('items', ['Item 1']);
     });
 
@@ -45,9 +44,7 @@ module('ivy-tabs', function (hooks) {
     this.set('items', ['Item 1', 'Item 2']);
     await render(eachTemplate);
 
-    run(this, function () {
-      this.set('items', ['Item 3']);
-    });
+    this.set('items', ['Item 3']);
 
     assert.strictEqual(this.selection, 'Item 3', 'previous tab became active');
   });
@@ -60,9 +57,7 @@ module('ivy-tabs', function (hooks) {
     this.set('items', A(['Item 1', 'Item 2']));
     await render(eachTemplate);
 
-    run(this, function () {
-      this.items.set('Item 2');
-    });
+    this.items.setObjects(['Item 2']);
 
     assert.strictEqual(this.selection, 'Item 2', 'tab selection is retained');
   });
@@ -75,9 +70,7 @@ module('ivy-tabs', function (hooks) {
     this.set('items', ['Item 1', 'Item 2', 'Item 3']);
     await render(eachTemplate);
 
-    run(this, function () {
-      this.set('items', ['Item 2', 'Item 3']);
-    });
+    this.set('items', ['Item 2', 'Item 3']);
 
     assert.strictEqual(this.selection, 'Item 2', 'selects next tab');
   });
@@ -112,10 +105,8 @@ module('ivy-tabs', function (hooks) {
       'Triggers initial, automatic on-select during setup',
     );
 
-    run(this, function () {
-      // Force a destruction of the component.
-      this.set('hideComponent', true);
-    });
+    // Force a destruction of the component.
+    this.set('hideComponent', true);
 
     assert.strictEqual(
       selectionCount,

@@ -1,5 +1,5 @@
 import Component from '@glimmer/component';
-import { once } from '@ember/runloop';
+import { registerDestructor } from '@ember/destroyable';
 
 /**
  * @module ivy-tabs
@@ -89,7 +89,8 @@ export default class IvyTabsPanelComponent extends Component {
   constructor() {
     super(...arguments);
     this.internalId = `ivy-tabs-panel-${instanceCount++}`;
-    once(this, this._registerWithTabsContainer);
+    this._registerWithTabsContainer();
+    registerDestructor(this, () => this._unregisterWithTabsContainer());
   }
 
   /**
@@ -133,9 +134,7 @@ export default class IvyTabsPanelComponent extends Component {
     }
     return [];
   }
-
   willDestroy() {
     super.willDestroy(...arguments);
-    once(this, this._unregisterWithTabsContainer);
   }
 }

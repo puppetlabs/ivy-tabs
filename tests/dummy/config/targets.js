@@ -6,6 +6,5 @@ const browsers = [
   'last 1 Safari versions',
 ];
 
-module.exports = {
-  browsers,
-};
+// eslint-disable-next-line no-undef
+module.exports = { browsers };

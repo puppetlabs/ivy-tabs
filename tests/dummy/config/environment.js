@@ -1,5 +1,6 @@
 'use strict';
 
+// eslint-disable-next-line no-undef
 module.exports = function (environment) {
   const ENV = {
     modulePrefix: 'dummy',
