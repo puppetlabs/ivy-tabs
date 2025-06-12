@@ -40,7 +40,7 @@
       <li>
         <div class="checkbox">
           <label>
-            <Input @checked={{item.checked}} @type="checkbox" /> Item {{item.index}}
+            <input type="checkbox" checked={{item.checked}} {{on "input" (fn this.toggleItemCheckedState item)}} /> Item {{item.index}}
           </label>
         </div>
       </li>

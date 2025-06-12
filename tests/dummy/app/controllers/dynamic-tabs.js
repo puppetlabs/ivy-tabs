@@ -49,4 +49,9 @@ export default class DynamicTabsController extends Controller {
   }
   @tracked
   selection = null;
+
+  @action
+  toggleItemCheckedState(item) {
+    item.checked = !item.checked;
+  }
 }
