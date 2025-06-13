@@ -9,7 +9,8 @@
         aria-label={{if this.effectiveAriaLabel this.effectiveAriaLabel}}
         aria-multiselectable={{this.isMultiSelectable}} 
         ...attributes
-        {{on "keydown" this.keyDown}}>
+        {{on "keydown" this.keyDown}}
+        {{this.registerWithTabsContainer}}>
 
         {{~yield (hash tab=(component "ivy-tabs-tab" tabList=this))~}}
     </ul>
@@ -22,7 +23,8 @@
         aria-label={{if this.effectiveAriaLabel this.effectiveAriaLabel}}
         aria-multiselectable={{this.isMultiSelectable}} 
         ...attributes
-        {{on "keydown" this.keyDown}}>
+        {{on "keydown" this.keyDown}}
+        {{this.registerWithTabsContainer}}>
 
         {{~yield (hash tab=(component "ivy-tabs-tab" tabList=this))~}}
     </div>

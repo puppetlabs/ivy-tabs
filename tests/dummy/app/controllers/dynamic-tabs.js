@@ -13,32 +13,28 @@ class ModelObject {
 export default class DynamicTabsController extends Controller {
   @action
   addItem() {
-    this.model.pushObject(new ModelObject(++this.nextIndex));
+    this.send('insertItemIntoModel', new ModelObject(++this.nextIndex));
   }
 
   @action
   removeItem(item) {
-    this.model.removeObject(item);
+    this.send('removeItemFromModel', item);
   }
 
   @action
   removeSelected() {
-    this.model.removeObjects(this.checkedItems);
+    this.send('removeItemsFromModel', this.checkedItems);
   }
 
   @action
-  updateSelection(item) {
-    this.selection = item;
+  updateDynamicSelection(item) {
+    if (this.selection !== item) {
+      this.selection = item;
+    }
   }
 
   get checkedItems() {
-    let result = [];
-    for (let i = 0; i < this.model.length; i++) {
-      if (this.model[i].checked) {
-        result.push(this.model[i]);
-      }
-    }
-    return result;
+    return this.model.entries.filter((item) => item.checked);
   }
 
   @tracked
@@ -47,6 +43,7 @@ export default class DynamicTabsController extends Controller {
   get noCheckedItems() {
     return this.checkedItems.length === 0;
   }
+
   @tracked
   selection = null;
 

@@ -1,6 +1,6 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-
+import { action } from '@ember/object';
 /**
  * @module ivy-tabs
  */
@@ -18,6 +18,7 @@ export default class IvyTabsTabsComponent extends Component {
    * @method registerTabList
    * @param {IvyTabs.IvyTabListComponent} tabList
    */
+  @action
   registerTabList(tabList) {
     this.tabList = tabList;
   }
@@ -28,6 +29,7 @@ export default class IvyTabsTabsComponent extends Component {
    * @method registerTabPanel
    * @param {IvyTabs.IvyTabPanelComponent} tabPanel
    */
+  @action
   registerTabPanel(tabPanel) {
     this.tabPanels = this.tabPanels.concat(tabPanel);
   }
@@ -44,6 +46,7 @@ export default class IvyTabsTabsComponent extends Component {
    * @method unregisterTabList
    * @param {IvyTabs.IvyTabListComponent} tabList
    */
+  @action
   unregisterTabList(/* tabList */) {
     this.tabList = null;
   }
@@ -54,6 +57,7 @@ export default class IvyTabsTabsComponent extends Component {
    * @method unregisterTabPanel
    * @param {IvyTabs.IvyTabPanelComponent} tabPanel
    */
+  @action
   unregisterTabPanel(tabPanel) {
     this.tabPanels = this.tabPanels.filter((element) => {
       return element !== tabPanel;

@@ -1,6 +1,7 @@
 import Component from '@glimmer/component';
-import { once } from '@ember/runloop';
 import { action } from '@ember/object';
+import { modifier } from 'ember-modifier';
+import { runTask } from 'ember-lifeline';
 
 /**
  * @module ivy-tabs
@@ -14,16 +15,14 @@ let ivyTabsTabCount = 0;
  * @extends Ember.Component
  */
 export default class IvyTabsTabComponent extends Component {
-  _registerWithTabList() {
-    this.args.tabList.registerTab(this);
-    if (this.isSelected) {
-      this.select();
-    }
-  }
-
-  _unregisterWithTabList() {
-    this.args.tabList.unregisterTab(this);
-  }
+  registerWithTabList = modifier(() => {
+    runTask(this, () => {
+      this.args.tabList.registerTab(this);
+    });
+    return () => {
+      this.args.tabList.unregisterTab(this);
+    };
+  });
 
   /**
    * Tells screenreaders which panel this tab controls.
@@ -85,7 +84,6 @@ export default class IvyTabsTabComponent extends Component {
   constructor() {
     super(...arguments);
     this.uniqueSelector = `ivy-tabs-tab-${ivyTabsTabCount++}`;
-    once(this, this._registerWithTabList);
   }
 
   /**
@@ -106,7 +104,11 @@ export default class IvyTabsTabComponent extends Component {
   @action
   select() {
     const onSelect = this.args.onSelect;
-    if (!this.isDestroying && typeof onSelect === 'function') {
+    if (
+      !this.isDestroying &&
+      !this.isDestroyed &&
+      typeof onSelect === 'function'
+    ) {
       onSelect(this.args.model);
     }
   }
@@ -188,10 +190,5 @@ export default class IvyTabsTabComponent extends Component {
       return this.args.tabList.args.tabsContainer;
     }
     return null;
-  }
-
-  willDestroy() {
-    super.willDestroy(...arguments);
-    once(this, this._unregisterWithTabList);
   }
 }

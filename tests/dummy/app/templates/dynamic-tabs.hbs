@@ -5,9 +5,9 @@
 <div class="example">
   <IvyTabs @selection={{this.selection}} as |tabs|>
     <tabs.tablist @aria-label="Example Tabs" @class="nav nav-tabs" @id="dynamic-tablist" @tagName="ul" as |tablist|>
-      {{#each this.model as |item|}}
+      {{#each this.model.entries as |item|}}
         <li class="nav-item {{if (eq this.selection item.index) "active"}}">
-          <tablist.tab @model={{item.index}} class="nav-link" @onSelect={{this.updateSelection}}>
+          <tablist.tab @model={{item.index}} class="nav-link" @onSelect={{this.updateDynamicSelection}}>
             <button aria-label="Close" class="close" type="button" {{on "click" (fn this.removeItem item)}}>
               <span aria-hidden="true">&times;</span>
             </button>
@@ -19,7 +19,7 @@
     </tabs.tablist>
 
     <div class="tab-content">
-      {{#each this.model as |item|}}
+      {{#each this.model.entries as |item|}}
         <tabs.tabpanel @model={{item.index}} class="tab-pane">
           <p>Here is some content for Item {{item.index}}. Kale chips marfa next level hella hot chicken. Post-ironic snackwave dreamcatcher lyft, hot chicken brunch roof party small batch quinoa migas ugh. Live-edge beard leggings affogato, marfa yr brooklyn. Jean shorts artisan cred schlitz gluten-free pour-over distillery sriracha portland iceland, normcore kombucha roof party. Gentrify truffaut hot chicken air plant, hashtag la croix photo booth kogi live-edge. Bitters kogi subway tile tousled offal bushwick narwhal fam. Cray salvia poutine, jianbing ethical hot chicken whatever VHS.</p>
         </tabs.tabpanel>
@@ -36,7 +36,7 @@
   </button>
 
   <ul class="list-unstyled">
-    {{#each this.model as |item|}}
+    {{#each this.model.entries as |item|}}
       <li>
         <div class="checkbox">
           <label>

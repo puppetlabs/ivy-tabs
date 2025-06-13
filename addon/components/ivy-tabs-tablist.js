@@ -1,8 +1,9 @@
 import Component from '@glimmer/component';
-import { isNone, isEmpty } from '@ember/utils';
+import { isNone } from '@ember/utils';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
-import { once, scheduleOnce } from '@ember/runloop';
+import { modifier } from 'ember-modifier';
+import { runTask } from 'ember-lifeline';
 
 export const DOWN_ARROW = 40;
 export const LEFT_ARROW = 37;
@@ -21,15 +22,17 @@ let instanceCount = 0;
  * @extends Ember.Component
  */
 export default class IvyTabsTabListComponent extends Component {
-  _registerWithTabsContainer() {
-    this.internalId = `ivy-tabs-list-${instanceCount++}`;
+  registerWithTabsContainer = modifier(() => {
     this.args.tabsContainer.registerTabList(this);
-    once(this, this.selectTab);
-  }
-
-  _unregisterWithTabsContainer() {
-    this.args.tabsContainer.unregisterTabList(this);
-  }
+    // if none of the tabs are selected, try to select one
+    let selected = this.tabs.find((tab) => tab.isSelected);
+    if (!selected && this.tabs.length > 0) {
+      this.selectTab();
+    }
+    return () => {
+      this.args.tabsContainer.unregisterTabList(this);
+    };
+  });
 
   /**
    * Tells screenreaders that only one tab can be selected at a time.
@@ -71,17 +74,20 @@ export default class IvyTabsTabListComponent extends Component {
    *
    * @method focusSelectedTab
    */
+  @action
   focusSelectedTab() {
-    this.selectedTab.focus();
+    if (!this.isDestroyed && !this.isDestroying) {
+      this.selectedTab.focus();
+    }
   }
 
   constructor() {
     super(...arguments);
-    this._registerWithTabsContainer();
+    this.internalId = `ivy-tabs-list-${instanceCount++}`;
   }
 
   get isEmpty() {
-    return isEmpty(this.tabs);
+    return this.tabs.length === 0;
   }
 
   /**
@@ -108,7 +114,7 @@ export default class IvyTabsTabListComponent extends Component {
     }
 
     event.preventDefault();
-    scheduleOnce('afterRender', this, this.focusSelectedTab);
+    runTask(this, this.focusSelectedTab);
   }
 
   /**
@@ -117,9 +123,12 @@ export default class IvyTabsTabListComponent extends Component {
    * @method registerTab
    * @param {IvyTabs.IvyTabComponent} tab
    */
+  @action
   registerTab(tab) {
-    this.tabs = this.tabs.concat(tab);
-    once(this, this.selectTab);
+    runTask(this, () => {
+      this.tabs = this.tabs.concat(tab);
+      this.selectTab();
+    });
   }
 
   /**
@@ -127,6 +136,7 @@ export default class IvyTabsTabListComponent extends Component {
    *
    * @method selectNextTab
    */
+  @action
   selectNextTab() {
     const selectedTab = this.selectedTab;
     const tabs = this.tabs;
@@ -155,6 +165,7 @@ export default class IvyTabsTabListComponent extends Component {
    *
    * @method selectPreviousTab
    */
+  @action
   selectPreviousTab() {
     const selectedTab = this.selectedTab;
     const tabs = this.tabs;
@@ -194,6 +205,7 @@ export default class IvyTabsTabListComponent extends Component {
     return this.args['aria-label'];
   }
 
+  @action
   selectTab() {
     const selection = this.selection;
 
@@ -213,18 +225,20 @@ export default class IvyTabsTabListComponent extends Component {
   selectTabByIndex(index) {
     const tab = this.tabs[index];
 
-    if (tab) {
-      tab.select();
+    if (tab && tab.isSelected === false) {
+      runTask(tab, () => {
+        tab.select();
+      });
     }
   }
 
   selectTabByModel(model) {
-    const tab = this.tabs.find((element) => {
-      return element.model === model;
-    });
+    const tab = this.tabs.find((element) => element.model === model);
 
     if (tab) {
-      tab.select();
+      runTask(tab, () => {
+        tab.select();
+      });
     }
   }
 
@@ -253,8 +267,7 @@ export default class IvyTabsTabListComponent extends Component {
    */
   unregisterTab(tab) {
     const index = tab.index;
-
-    if (tab.isSelected) {
+    if (tab.isSelected && !this.isDestroying && !this.isDestroyed) {
       if (index === 0) {
         this.selectNextTab();
       } else {
@@ -265,10 +278,5 @@ export default class IvyTabsTabListComponent extends Component {
     this.tabs = this.tabs.filter((element) => {
       return element !== tab;
     });
-  }
-
-  willDestroy() {
-    super.willDestroy(...arguments);
-    this._unregisterWithTabsContainer();
   }
 }

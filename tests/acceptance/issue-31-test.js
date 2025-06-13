@@ -9,12 +9,12 @@ module('Acceptance | issue #31', function (hooks) {
   test('should keep Tab A selected when navigating between demo pages', async function (assert) {
     await visit('/');
 
-    assert.strictEqual(findTab('Tab A').getAttribute('aria-selected'), 'true');
+    assert.dom(findTab('Tab A')).hasAria('selected', 'true');
 
     await visit('/query-params');
     await visit('/');
 
-    assert.strictEqual(findTab('Tab A').getAttribute('aria-selected'), 'true');
+    assert.dom(findTab('Tab A')).hasAria('selected', 'true');
   });
 
   test('should select correct next tab after bulk removal', async function (assert) {
@@ -23,20 +23,15 @@ module('Acceptance | issue #31', function (hooks) {
     await click(findButtonByText('Add an Item'));
     await click(findButtonByText('Add an Item'));
 
-    assert.strictEqual(
-      findTab('Item 1').getAttribute('aria-selected'),
-      'true',
-      'Item 1 is selected',
-    );
+    assert
+      .dom(findTab('Item 1'))
+      .hasAria('selected', 'true', 'Item 1 is selected by default');
 
     await click(findCheckboxFor('Item 1'));
     await click(findCheckboxFor('Item 2'));
     await click(findButtonByText('Remove 2 Item(s)'));
-
-    assert.strictEqual(
-      findTab('Item 3').getAttribute('aria-selected'),
-      'true',
-      'Item 3 is selected',
-    );
+    assert
+      .dom(findTab('Item 3'))
+      .hasAria('selected', 'true', 'Item 3 is selected after removal');
   });
 });

@@ -8,8 +8,7 @@ module('Acceptance | query params', function (hooks) {
 
   test('should select a tab by query param', async function (assert) {
     await visit('/query-params?tab=B');
-
-    assert.strictEqual(findTab('Tab B').getAttribute('aria-selected'), 'true');
+    assert.dom(findTab('Tab B')).hasAria('selected', 'true');
   });
 
   test('selecting a tab should update the query param', async function (assert) {

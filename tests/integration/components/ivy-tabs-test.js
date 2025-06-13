@@ -1,10 +1,8 @@
 import hbs from 'htmlbars-inline-precompile';
-import { run } from '@ember/runloop';
-import { A } from '@ember/array';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 
-import { render } from '@ember/test-helpers';
+import { render, settled } from '@ember/test-helpers';
 
 module('ivy-tabs', function (hooks) {
   setupRenderingTest(hooks);
@@ -30,9 +28,8 @@ module('ivy-tabs', function (hooks) {
     this.set('items', ['Item 1', 'Item 2']);
     await render(eachTemplate);
 
-    run(this, function () {
-      this.set('items', ['Item 1']);
-    });
+    this.set('items', ['Item 1']);
+    await settled();
 
     assert.strictEqual(this.selection, 'Item 1', 'previous tab became active');
   });
@@ -45,9 +42,8 @@ module('ivy-tabs', function (hooks) {
     this.set('items', ['Item 1', 'Item 2']);
     await render(eachTemplate);
 
-    run(this, function () {
-      this.set('items', ['Item 3']);
-    });
+    this.set('items', ['Item 3']);
+    await settled();
 
     assert.strictEqual(this.selection, 'Item 3', 'previous tab became active');
   });
@@ -57,12 +53,11 @@ module('ivy-tabs', function (hooks) {
       this.set('selection', item);
     });
     this.set('selection', 'Item 2');
-    this.set('items', A(['Item 1', 'Item 2']));
+    this.set('items', ['Item 1', 'Item 2']);
     await render(eachTemplate);
 
-    run(this, function () {
-      this.items.set('Item 2');
-    });
+    this.set('items', ['Item 2']);
+    await settled();
 
     assert.strictEqual(this.selection, 'Item 2', 'tab selection is retained');
   });
@@ -75,9 +70,8 @@ module('ivy-tabs', function (hooks) {
     this.set('items', ['Item 1', 'Item 2', 'Item 3']);
     await render(eachTemplate);
 
-    run(this, function () {
-      this.set('items', ['Item 2', 'Item 3']);
-    });
+    this.set('items', ['Item 2', 'Item 3']);
+    await settled();
 
     assert.strictEqual(this.selection, 'Item 2', 'selects next tab');
   });
@@ -86,8 +80,10 @@ module('ivy-tabs', function (hooks) {
     let selectionCount = 0;
 
     this.set('selectionAction', (selection) => {
-      this.set('selection', selection);
-      selectionCount++;
+      if (selection !== this.selection) {
+        this.set('selection', selection);
+        selectionCount++;
+      }
     });
 
     this.set('items', ['Item 1', 'Item 2', 'Item 3']);
@@ -112,10 +108,8 @@ module('ivy-tabs', function (hooks) {
       'Triggers initial, automatic on-select during setup',
     );
 
-    run(this, function () {
-      // Force a destruction of the component.
-      this.set('hideComponent', true);
-    });
+    this.set('hideComponent', true);
+    await settled();
 
     assert.strictEqual(
       selectionCount,
