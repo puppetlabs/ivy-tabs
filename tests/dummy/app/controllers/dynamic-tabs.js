@@ -28,9 +28,7 @@ export default class DynamicTabsController extends Controller {
 
   @action
   updateDynamicSelection(item) {
-    if (this.selection !== item) {
-      this.selection = item;
-    }
+    this.selection = item;
   }
 
   get checkedItems() {
