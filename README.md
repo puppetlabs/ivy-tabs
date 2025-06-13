@@ -1,22 +1,19 @@
 # @puppet/ivy-tabs
-
-[![Build Status](https://travis-ci.org/IvyApp/ivy-tabs.svg?branch=master)](https://travis-ci.org/IvyApp/ivy-tabs)
-[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=IvyApp/ivy-tabs)](https://dependabot.com)
-[![Ember Observer Score](http://emberobserver.com/badges/ivy-tabs.svg)](http://emberobserver.com/addons/ivy-tabs)
-
 A group of Ember.js Components that interact to create a [WAI-ARIA tab] interface.
 
 Special thanks to [ic-tabs], which this addon is based on.
 ## Compatibility
 
-* Ember.js v4.12 or above
-* Ember CLI v4.12 or above
-* Node.js v18 or above
+- Ember.js v4.12 or above
+- Ember CLI v4.12 or above
+- Node.js v18 or above
 
 ## Installation
 
 ```sh
 $ ember install ivy-tabs
+```
+ember install @puppet/ivy-tabs
 ```
 
 ## Usage
@@ -92,7 +89,6 @@ override the `activeClass` property of your ivy-tabs-tabpanel):
   display: block;
 }
 ```
-
 
 ## Contributing
 

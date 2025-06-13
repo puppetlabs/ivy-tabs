@@ -7,6 +7,7 @@ export default class Router extends EmberRouter {
 }
 
 Router.map(function () {
+  this.route('simple');
   this.route('dynamic-tabs');
   this.route('query-params');
   this.route('routable-tabs', function () {

@@ -1,5 +1,6 @@
 import Component from '@glimmer/component';
-import { once } from '@ember/runloop';
+import { runTask } from 'ember-lifeline';
+import { modifier } from 'ember-modifier';
 
 /**
  * @module ivy-tabs
@@ -13,13 +14,14 @@ let instanceCount = 0;
  * @extends Ember.Component
  */
 export default class IvyTabsPanelComponent extends Component {
-  _registerWithTabsContainer() {
-    this.args.tabsContainer.registerTabPanel(this);
-  }
-
-  _unregisterWithTabsContainer() {
-    this.args.tabsContainer.unregisterTabPanel(this);
-  }
+  registerWithTabsContainer = modifier(() => {
+    runTask(this, () => {
+      this.args.tabsContainer.registerTabPanel(this);
+    });
+    return () => {
+      this.args.tabsContainer.unregisterTabPanel(this);
+    };
+  });
 
   /**
    * Accessed as a className binding to apply the panel's `activeClass` CSS
@@ -89,7 +91,6 @@ export default class IvyTabsPanelComponent extends Component {
   constructor() {
     super(...arguments);
     this.internalId = `ivy-tabs-panel-${instanceCount++}`;
-    once(this, this._registerWithTabsContainer);
   }
 
   /**
@@ -132,10 +133,5 @@ export default class IvyTabsPanelComponent extends Component {
       return tabList.tabs;
     }
     return [];
-  }
-
-  willDestroy() {
-    super.willDestroy(...arguments);
-    once(this, this._unregisterWithTabsContainer);
   }
 }

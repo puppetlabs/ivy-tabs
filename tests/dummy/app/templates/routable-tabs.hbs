@@ -17,19 +17,19 @@
     </tabs.tablist>
 
     <div class="tab-content">
-      <tabs.tabpanel @model={{"tab-a"}} class="tab-pane">
+      <tabs.tabpanel @model="tab-a" class="tab-pane">
         {{#if (eq this.model 'tab-a')}}
           {{outlet}}
         {{/if}}
       </tabs.tabpanel>
 
-      <tabs.tabpanel @model={{"tab-b"}} class="tab-pane">
+      <tabs.tabpanel @model="tab-b" class="tab-pane">
         {{#if (eq this.model 'tab-b')}}
           {{outlet}}
         {{/if}}
       </tabs.tabpanel>
 
-      <tabs.tabpanel @model={{"tab-c"}} class="tab-pane">
+      <tabs.tabpanel @model="tab-c" class="tab-pane">
         {{#if (eq this.model 'tab-c')}}
           {{outlet}}
         {{/if}}

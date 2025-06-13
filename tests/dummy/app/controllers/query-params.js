@@ -7,10 +7,12 @@ export default class QueryParamsController extends Controller {
     return ['selection'];
   }
 
-  @tracked selection;
+  @tracked selection = '';
 
   @action
-  updateSelection(newValue) {
-    this.selection = newValue;
+  updateQuerySelection(newValue) {
+    if (this.selection !== newValue) {
+      this.selection = newValue;
+    }
   }
 }

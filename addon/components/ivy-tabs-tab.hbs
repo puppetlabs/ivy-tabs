@@ -7,6 +7,7 @@
   role="tab"
   href="{{this.href}}"
   {{on "click" this.handleClick}}
+  {{this.registerWithTabList}}
   ...attributes>
   {{~yield~}}
 </a>
