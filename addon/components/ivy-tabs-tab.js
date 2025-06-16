@@ -105,6 +105,7 @@ export default class IvyTabsTabComponent extends Component {
   select() {
     const onSelect = this.args.onSelect;
     if (
+      !this.isSelected &&
       !this.isDestroying &&
       !this.isDestroyed &&
       typeof onSelect === 'function'

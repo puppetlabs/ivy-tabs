@@ -11,8 +11,6 @@ export default class QueryParamsController extends Controller {
 
   @action
   updateQuerySelection(newValue) {
-    if (this.selection !== newValue) {
-      this.selection = newValue;
-    }
+    this.selection = newValue;
   }
 }
