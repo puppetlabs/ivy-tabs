@@ -56,7 +56,9 @@ export default class IvyTabsTabComponent extends Component {
   @action
   handleClick(event) {
     event.preventDefault();
-    this.select();
+    if (this.args.tabList.isRegistered(this)) {
+      this.select();
+    }
   }
 
   get href() {
@@ -116,7 +118,7 @@ export default class IvyTabsTabComponent extends Component {
 
   @action
   focus() {
-    let element = document.getElementById(this.id);
+    const element = document.getElementById(this.id);
     if (element) {
       element.focus();
     }
