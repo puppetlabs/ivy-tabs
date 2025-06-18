@@ -1,18 +1,40 @@
 <h2>Dynamic Tabs Example</h2>
 
-<p>Here's an example of using <code>ivy-tabs</code> with a dynamic collection of objects. Try clicking the "Add an Item" button below to add a tab. To remove one, click the <strong>&times;</strong> to the left of the tab's name or select its corresponding checkbox and click the "Remove Items" button.</p>
+<p>Here's an example of using
+  <code>ivy-tabs</code>
+  with a dynamic collection of objects. Try clicking the "Add an Item" button
+  below to add a tab. To remove one, click the
+  <strong>&times;</strong>
+  to the left of the tab's name or select its corresponding checkbox and click
+  the "Remove Items" button.</p>
 
 <div class="example">
   <IvyTabs @selection={{this.selection}} as |tabs|>
-    <tabs.tablist @aria-label="Example Tabs" @class="nav nav-tabs" @id="dynamic-tablist" @tagName="ul" as |tablist|>
+    <tabs.tablist
+      @aria-label="Example Tabs"
+      @class="nav nav-tabs"
+      @id="dynamic-tablist"
+      @tagName="ul"
+      as |tablist|
+    >
       {{#each this.model.entries as |item|}}
-        <li class="nav-item {{if (eq this.selection item.index) "active"}}">
-          <tablist.tab @model={{item.index}} class="nav-link" @onSelect={{this.updateDynamicSelection}}>
-            <button aria-label="Close" class="close" type="button" {{on "click" (fn this.removeItem item)}}>
+        <li class="nav-item {{if (eq this.selection item.index) 'active'}}">
+          <tablist.tab
+            @model={{item.index}}
+            class="nav-link"
+            @onSelect={{this.updateDynamicSelection}}
+          >
+            <button
+              aria-label="Close"
+              class="close"
+              type="button"
+              {{on "click" (fn this.removeItem item)}}
+            >
               <span aria-hidden="true">&times;</span>
             </button>
 
-            Item {{item.index}}
+            Item
+            {{item.index}}
           </tablist.tab>
         </li>
       {{/each}}
@@ -21,7 +43,16 @@
     <div class="tab-content">
       {{#each this.model.entries as |item|}}
         <tabs.tabpanel @model={{item.index}} class="tab-pane">
-          <p>Here is some content for Item {{item.index}}. Kale chips marfa next level hella hot chicken. Post-ironic snackwave dreamcatcher lyft, hot chicken brunch roof party small batch quinoa migas ugh. Live-edge beard leggings affogato, marfa yr brooklyn. Jean shorts artisan cred schlitz gluten-free pour-over distillery sriracha portland iceland, normcore kombucha roof party. Gentrify truffaut hot chicken air plant, hashtag la croix photo booth kogi live-edge. Bitters kogi subway tile tousled offal bushwick narwhal fam. Cray salvia poutine, jianbing ethical hot chicken whatever VHS.</p>
+          <p>Here is some content for Item
+            {{item.index}}. Kale chips marfa next level hella hot chicken.
+            Post-ironic snackwave dreamcatcher lyft, hot chicken brunch roof
+            party small batch quinoa migas ugh. Live-edge beard leggings
+            affogato, marfa yr brooklyn. Jean shorts artisan cred schlitz
+            gluten-free pour-over distillery sriracha portland iceland, normcore
+            kombucha roof party. Gentrify truffaut hot chicken air plant,
+            hashtag la croix photo booth kogi live-edge. Bitters kogi subway
+            tile tousled offal bushwick narwhal fam. Cray salvia poutine,
+            jianbing ethical hot chicken whatever VHS.</p>
         </tabs.tabpanel>
       {{/each}}
     </div>
@@ -31,8 +62,15 @@
     Add an Item
   </button>
 
-  <button class="btn btn-secondary" disabled={{this.noCheckedItems}} type="button" {{on "click" this.removeSelected}}>
-    Remove {{this.checkedItems.length}} Item(s)
+  <button
+    class="btn btn-secondary"
+    disabled={{this.noCheckedItems}}
+    type="button"
+    {{on "click" this.removeSelected}}
+  >
+    Remove
+    {{this.checkedItems.length}}
+    Item(s)
   </button>
 
   <ul class="list-unstyled">
@@ -40,7 +78,13 @@
       <li>
         <div class="checkbox">
           <label>
-            <input type="checkbox" checked={{item.checked}} {{on "input" (fn this.toggleItemCheckedState item)}} /> Item {{item.index}}
+            <input
+              type="checkbox"
+              checked={{item.checked}}
+              {{on "input" (fn this.toggleItemCheckedState item)}}
+            />
+            Item
+            {{item.index}}
           </label>
         </div>
       </li>

@@ -53,26 +53,26 @@ the [puppet-dev mailing list](https://groups.google.com/forum/#!forum/puppet-dev
 
 ## Getting Started
 
-* Make sure you have a [Jira account](https://tickets.puppetlabs.com).
-* Make sure you have a [GitHub account](https://github.com/signup/free).
-* Submit a Jira ticket for your issue if one does not already exist.
-  * Clearly describe the issue including steps to reproduce when it is a bug.
-  * Make sure you fill in the earliest version that you know has the issue.
-  * A ticket is not necessary for [trivial changes](https://puppet.com/community/trivial-patch-exemption-policy)
-* Fork the repository on GitHub.
+- Make sure you have a [Jira account](https://tickets.puppetlabs.com).
+- Make sure you have a [GitHub account](https://github.com/signup/free).
+- Submit a Jira ticket for your issue if one does not already exist.
+  - Clearly describe the issue including steps to reproduce when it is a bug.
+  - Make sure you fill in the earliest version that you know has the issue.
+  - A ticket is not necessary for [trivial changes](https://puppet.com/community/trivial-patch-exemption-policy)
+- Fork the repository on GitHub.
 
 ## Making Changes
 
-* Create a topic branch from where you want to base your work.
-  * This is usually the master branch.
-  * Only target release branches if you are certain your fix must be on that
+- Create a topic branch from where you want to base your work.
+  - This is usually the master branch.
+  - Only target release branches if you are certain your fix must be on that
     branch.
-  * To quickly create a topic branch based on master, run `git checkout -b
-    fix/master/my_contribution master`. Please avoid working directly on the
+  - To quickly create a topic branch based on master, run `git checkout -b
+fix/master/my_contribution master`. Please avoid working directly on the
     `master` branch.
-* Make commits of logical and atomic units.
-* Check for unnecessary whitespace with `git diff --check` before committing.
-* Make sure your commit messages are in the proper format. If the commit
+- Make commits of logical and atomic units.
+- Check for unnecessary whitespace with `git diff --check` before committing.
+- Make sure your commit messages are in the proper format. If the commit
   addresses an issue filed in the
   [Puppet Jira project](https://tickets.puppetlabs.com/browse/PUP), start
   the first line of the commit with the issue number in parentheses.
@@ -90,8 +90,9 @@ the [puppet-dev mailing list](https://groups.google.com/forum/#!forum/puppet-dev
       from our issue tracker. The body describes the behavior without the patch,
       why this is a problem, and how the patch fixes the problem when applied.
   ```
-* Make sure you have added the necessary tests for your changes.
-* For details on how to run tests, please see [the quickstart guide](https://github.com/puppetlabs/puppet/blob/master/docs/quickstart.md)
+
+- Make sure you have added the necessary tests for your changes.
+- For details on how to run tests, please see [the quickstart guide](https://github.com/puppetlabs/puppet/blob/master/docs/quickstart.md)
 
 ## Writing Translatable Code
 
@@ -103,10 +104,10 @@ for the translators.
 
 When adding user-facing strings to your work, follow these guidelines:
 
-* Use full sentences. Strings built up out of concatenated bits are hard to translate.
-* Use string formatting instead of interpolation. Use the hash format and give good names to the placeholder values that can be used by translators to understand the meaning of the formatted values.
+- Use full sentences. Strings built up out of concatenated bits are hard to translate.
+- Use string formatting instead of interpolation. Use the hash format and give good names to the placeholder values that can be used by translators to understand the meaning of the formatted values.
   For example: `_('Creating new user %{name}.') % { name: user.name }`
-* Use `n_()` for pluralization. (see gettext gem docs linked above for details)
+- Use `n_()` for pluralization. (see gettext gem docs linked above for details)
 
 It is the responsibility of contributors and code reviewers to ensure that all
 user-facing strings are marked in new PRs before merging.
@@ -115,7 +116,7 @@ user-facing strings are marked in new PRs before merging.
 
 For [changes of a trivial nature](https://puppet.com/community/trivial-patch-exemption-policy), it is not always necessary to create a new
 ticket in Jira. In this case, it is appropriate to start the first line of a
-commit with one of  `(docs)`, `(maint)`, or `(packaging)` instead of a ticket
+commit with one of `(docs)`, `(maint)`, or `(packaging)` instead of a ticket
 number.
 
 If a Jira ticket exists for the documentation commit, you can include it
@@ -140,19 +141,19 @@ respectively.
 
 ## Submitting Changes
 
-* Sign the [Contributor License Agreement](http://cla.puppet.com/).
-* Push your changes to a topic branch in your fork of the repository.
-* Submit a pull request to the repository in the puppetlabs organization.
-* Update your Jira ticket to mark that you have submitted code and are ready
+- Sign the [Contributor License Agreement](http://cla.puppet.com/).
+- Push your changes to a topic branch in your fork of the repository.
+- Submit a pull request to the repository in the puppetlabs organization.
+- Update your Jira ticket to mark that you have submitted code and are ready
   for it to be reviewed (Status: Ready for Merge).
-  * Include a link to the pull request in the ticket.
-* The core team looks at Pull Requests on a regular basis in a weekly triage
+  - Include a link to the pull request in the ticket.
+- The core team looks at Pull Requests on a regular basis in a weekly triage
   meeting that we hold in a public Google Hangout. The hangout is announced in
   the weekly status updates that are sent to the puppet-dev list. Notes are
   posted to the [Puppet Community community-triage
   repo](https://github.com/puppet-community/community-triage/tree/master/core/notes)
   and include a link to a YouTube recording of the hangout.
-* After feedback has been given we expect responses within two weeks. After two
+- After feedback has been given we expect responses within two weeks. After two
   weeks we may close the pull request if it isn't showing any activity.
 
 ## Revert Policy
@@ -178,16 +179,16 @@ ensure the issue has been resolved.
 
 ### Summary
 
-* Changes resulting in test pipeline failures will be reverted if they cannot
+- Changes resulting in test pipeline failures will be reverted if they cannot
   be resolved within one business day.
 
 ## Additional Resources
 
-* [Puppet community guidelines](https://puppet.com/community/community-guidelines)
-* [Bug tracker (Jira)](https://tickets.puppetlabs.com)
-* [Contributor License Agreement](http://cla.puppet.com/)
-* [General GitHub documentation](https://help.github.com/)
-* [GitHub pull request documentation](https://help.github.com/articles/creating-a-pull-request/)
-* #puppet-dev IRC channel on freenode.org ([Archive](https://botbot.me/freenode/puppet-dev/))
-* [puppet-dev mailing list](https://groups.google.com/forum/#!forum/puppet-dev)
-* [Community PR Triage notes](https://github.com/puppet-community/community-triage/tree/master/core/notes)
+- [Puppet community guidelines](https://puppet.com/community/community-guidelines)
+- [Bug tracker (Jira)](https://tickets.puppetlabs.com)
+- [Contributor License Agreement](http://cla.puppet.com/)
+- [General GitHub documentation](https://help.github.com/)
+- [GitHub pull request documentation](https://help.github.com/articles/creating-a-pull-request/)
+- #puppet-dev IRC channel on freenode.org ([Archive](https://botbot.me/freenode/puppet-dev/))
+- [puppet-dev mailing list](https://groups.google.com/forum/#!forum/puppet-dev)
+- [Community PR Triage notes](https://github.com/puppet-community/community-triage/tree/master/core/notes)

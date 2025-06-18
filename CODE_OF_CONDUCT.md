@@ -4,7 +4,7 @@ We want to keep the Puppet communities awesome, and we need your help to keep it
 that way. While we have specific guidelines for various tools (see links below),
 in general, you should:
 
-* **Be nice**: Be courteous, respectful and polite to fellow community members. No
+- **Be nice**: Be courteous, respectful and polite to fellow community members. No
   offensive comments related to gender, gender identity or expression, sexual
   orientation, disability, physical appearance, body size, race, religion; no
   sexual images in public spaces, real or implied violence, intimidation,
@@ -12,18 +12,18 @@ in general, you should:
   disruption of talks or other events, inappropriate physical contact, doxxing, or
   unwelcome sexual attention will be tolerated. We like nice people way better
   than mean ones!
-* **Encourage diversity and participation**: Make everyone in our community feel
+- **Encourage diversity and participation**: Make everyone in our community feel
   welcome, regardless of their background, and do everything possible to encourage
   participation in our community.
-* **Focus on constructive criticisms**: When offering suggestions, whether in online
+- **Focus on constructive criticisms**: When offering suggestions, whether in online
   discussions or as comments on a pull request, you should always use welcoming
   and inclusive language. Be respectful of differing viewpoints and the fact that
   others may not have the same experiences you do. Offer suggestions for
   improvement, rather than focusing on mistakes. When others critique your work or
   ideas, gracefully accept the criticisms and default to assuming good intentions.
-* **Keep it legal**: Basically, don't get us in trouble. Share only content that you
+- **Keep it legal**: Basically, don't get us in trouble. Share only content that you
   own, do not share private or sensitive information, and don't break the law.
-* **Stay on topic**: Keep conversation in a thread on topic, whether that's a pull
+- **Stay on topic**: Keep conversation in a thread on topic, whether that's a pull
   request or a Slack conversation or anything else. Make sure that you are posting
   to the correct channel and remember that nobody likes spam.
 
@@ -34,19 +34,19 @@ do need a fair way to deal with people who do harm to our community. Extreme
 violations of a threatening, abusive, destructive, or illegal nature will be
 addressed immediately and are not subject to 3 strikes.
 
-* First occurrence: We'll give you a friendly, but public, reminder that the
+- First occurrence: We'll give you a friendly, but public, reminder that the
   behavior is inappropriate according to our guidelines.
-* Second occurrence: We'll send you a private message with a warning that any
+- Second occurrence: We'll send you a private message with a warning that any
   additional violations will result in removal from the community.
-* Third occurrence: Depending on the violation, we might need to delete or ban
+- Third occurrence: Depending on the violation, we might need to delete or ban
   your account.
 
 Notes:
 
-* Obvious spammers are banned on first occurrence. If we don’t do this, we’ll
+- Obvious spammers are banned on first occurrence. If we don’t do this, we’ll
   have spam all over the place.
-* Violations are forgiven after 6 months of good behavior, and we won’t hold a grudge.
-* People who are committing minor formatting / style infractions will get some
+- Violations are forgiven after 6 months of good behavior, and we won’t hold a grudge.
+- People who are committing minor formatting / style infractions will get some
   education, rather than hammering them in the 3 strikes process.
 
 Contact conduct@puppet.com to report abuse or appeal violations. This email list

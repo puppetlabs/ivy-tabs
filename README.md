@@ -1,7 +1,9 @@
 # @puppet/ivy-tabs
+
 A group of Ember.js Components that interact to create a [WAI-ARIA tab] interface.
 
 Special thanks to [ic-tabs], which this addon is based on.
+
 ## Compatibility
 
 - Ember.js v5.8 or above
@@ -13,8 +15,10 @@ Special thanks to [ic-tabs], which this addon is based on.
 ```sh
 $ ember install ivy-tabs
 ```
+
 ember install @puppet/ivy-tabs
-```
+
+````
 
 ## Usage
 
@@ -46,17 +50,17 @@ ember install @puppet/ivy-tabs
     <h2>Baz</h2>
   </tabs.tabpanel>
 </IvyTabs>
-```
+````
 
 Some things to note:
 
-  * Associations between tabs and panels are explicitly defined by the "models"
-    given to them. In the above example, the
-    given tab models are "TabA", "TabB", and "TabC". This model could be any
-    JavaScript Object that you'd like, they are not required to be strings.
-  * An `onSelect` action is sent when a tab is selected. As an argument, it
-    receives the model defined on the tab (for example, when the Foo tab is
-    selected, the `onSelect` event will carry "TabA" as an argument).
+- Associations between tabs and panels are explicitly defined by the "models"
+  given to them. In the above example, the
+  given tab models are "TabA", "TabB", and "TabC". This model could be any
+  JavaScript Object that you'd like, they are not required to be strings.
+- An `onSelect` action is sent when a tab is selected. As an argument, it
+  receives the model defined on the tab (for example, when the Foo tab is
+  selected, the `onSelect` event will carry "TabA" as an argument).
 
 ### Presentation
 
@@ -125,8 +129,8 @@ ember test --server
 
 ### Linting
 
-* `npm run lint:js`
-* `npm run lint:js -- --fix`
+- `npm run lint:js`
+- `npm run lint:js -- --fix`
 
 ### Building
 

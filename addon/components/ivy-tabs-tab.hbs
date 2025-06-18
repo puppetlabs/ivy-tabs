@@ -1,5 +1,6 @@
-<a id="{{this.id}}" 
-  class="ivy-tabs-tab {{if this.isSelected 'active'}}" 
+<a
+  id="{{this.id}}"
+  class="ivy-tabs-tab {{if this.isSelected 'active'}}"
   tabindex={{if this.isSelected "0"}}
   aria-controls="{{this.ariaControls}}"
   aria-expanded="{{this.ariaExpanded}}"
@@ -8,6 +9,7 @@
   href="{{this.href}}"
   {{on "click" this.handleClick}}
   {{this.registerWithTabList}}
-  ...attributes>
+  ...attributes
+>
   {{~yield~}}
 </a>
