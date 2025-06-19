@@ -32,9 +32,7 @@
             >
               <span aria-hidden="true">&times;</span>
             </button>
-
-            Item
-            {{item.index}}
+            Item {{item.index}}
           </tablist.tab>
         </li>
       {{/each}}
@@ -68,9 +66,7 @@
     type="button"
     {{on "click" this.removeSelected}}
   >
-    Remove
-    {{this.checkedItems.length}}
-    Item(s)
+    Remove {{this.checkedItems.length}} Item(s)
   </button>
 
   <ul class="list-unstyled">
@@ -83,8 +79,7 @@
               checked={{item.checked}}
               {{on "input" (fn this.toggleItemCheckedState item)}}
             />
-            Item
-            {{item.index}}
+            Item {{item.index}}
           </label>
         </div>
       </li>
