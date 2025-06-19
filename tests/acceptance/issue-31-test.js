@@ -1,5 +1,5 @@
 import { click, visit } from '@ember/test-helpers';
-import { findButtonByText, findCheckboxFor, findTab } from '../helpers/finders';
+import { findTab } from '../helpers/finders';
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
 
@@ -19,19 +19,18 @@ module('Acceptance | issue #31', function (hooks) {
 
   test('should select correct next tab after bulk removal', async function (assert) {
     await visit('/dynamic-tabs');
-    await click(findButtonByText('Add an Item'));
-    await click(findButtonByText('Add an Item'));
-    await click(findButtonByText('Add an Item'));
+    await click('[data-test-add-item]');
+    await click('[data-test-add-item]');
+    await click('[data-test-add-item]');
 
     assert
-      .dom(findTab('Item 1'))
+      .dom('[data-test-selector="tab-1"]')
       .hasAria('selected', 'true', 'Item 1 is selected by default');
-
-    await click(findCheckboxFor('Item 1'));
-    await click(findCheckboxFor('Item 2'));
-    await click(findButtonByText('Remove 2 Item(s)'));
+    await click('[data-test-checkbox="1"]');
+    await click('[data-test-checkbox="2"]');
+    await click('[data-test-remove-items]');
     assert
-      .dom(findTab('Item 3'))
+      .dom('[data-test-selector="tab-3"]')
       .hasAria('selected', 'true', 'Item 3 is selected after removal');
   });
 });

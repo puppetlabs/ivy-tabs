@@ -23,6 +23,7 @@
             @model={{item.index}}
             class="nav-link"
             @onSelect={{this.updateDynamicSelection}}
+            data-test-selector="tab-{{item.index}}"
           >
             <button
               aria-label="Close"
@@ -32,7 +33,8 @@
             >
               <span aria-hidden="true">&times;</span>
             </button>
-            Item {{item.index}}
+            Item
+            {{item.index}}
           </tablist.tab>
         </li>
       {{/each}}
@@ -56,7 +58,12 @@
     </div>
   </IvyTabs>
 
-  <button class="btn btn-primary" type="button" {{on "click" this.addItem}}>
+  <button
+    class="btn btn-primary"
+    type="button"
+    {{on "click" this.addItem}}
+    data-test-add-item
+  >
     Add an Item
   </button>
 
@@ -65,8 +72,11 @@
     disabled={{this.noCheckedItems}}
     type="button"
     {{on "click" this.removeSelected}}
+    data-test-remove-items
   >
-    Remove {{this.checkedItems.length}} Item(s)
+    Remove
+    {{this.checkedItems.length}}
+    Item(s)
   </button>
 
   <ul class="list-unstyled">
@@ -78,8 +88,10 @@
               type="checkbox"
               checked={{item.checked}}
               {{on "input" (fn this.toggleItemCheckedState item)}}
+              data-test-checkbox="{{item.index}}"
             />
-            Item {{item.index}}
+            Item
+            {{item.index}}
           </label>
         </div>
       </li>
